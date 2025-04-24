@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import { AdminHome as AdminHomePage } from "~/pages/admin/admin-home/admin-home";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function AdminHome() {
-  return "Admin";
+  return <AdminHomePage />;
 }

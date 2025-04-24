@@ -30,7 +30,7 @@ export function AdminHome() {
 
 const functions = [
   {
-    href: "/destination",
+    href: "./destination",
     text: "Destinations",
     icon: (
       // https://lucide.dev/icons/map-pin-house
@@ -54,7 +54,7 @@ const functions = [
     ),
   },
   {
-    href: "/flights",
+    href: "./flights",
     text: "Flights",
     icon: (
       // https://lucide.dev/icons/plane
@@ -75,7 +75,7 @@ const functions = [
     ),
   },
   {
-    href: "/bookings",
+    href: "./bookings",
     text: "Bookings",
     icon: (
       // https://lucide.dev/icons/tickets

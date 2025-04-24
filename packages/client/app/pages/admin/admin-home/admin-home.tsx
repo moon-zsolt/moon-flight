@@ -30,7 +30,7 @@ export function AdminHome() {
 
 const functions = [
   {
-    href: "./destination",
+    href: "./destinations",
     text: "Destinations",
     icon: (
       // https://lucide.dev/icons/map-pin-house

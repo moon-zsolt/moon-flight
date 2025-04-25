@@ -29,6 +29,6 @@ export class Booking {
 
   @BeforeInsert()
   private generateFlightCode() {
-    this.code = randomUUID().slice(0, 8);
+    this.code = randomUUID().slice(0, 8).toUpperCase();
   }
 }

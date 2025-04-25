@@ -41,6 +41,6 @@ export class Flight {
 
   @BeforeInsert()
   private generateFlightCode() {
-    this.code = "MF" + randomUUID().slice(0, 4);
+    this.code = "MF" + randomUUID().slice(0, 4).toUpperCase();
   }
 }

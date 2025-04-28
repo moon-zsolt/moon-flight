@@ -8,6 +8,7 @@ import { CraftModule } from "./feature/craft/craft.module";
 import { LocationModule } from "./feature/location/location.module";
 import { SeedModule } from "./config/seed/seed.module";
 import { ApiModule } from "./api/api.module";
+import { FrontendModule } from "./shared/frontend/frontend.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ApiModule } from "./api/api.module";
     CraftModule,
     SeedModule,
     ApiModule,
+    FrontendModule.register(),
   ],
   controllers: [],
   providers: [AppService],

@@ -2,7 +2,7 @@ import {
   Injectable,
   Logger,
   OnApplicationBootstrap,
-  OnApplicationShutdown,
+  OnModuleDestroy,
 } from "@nestjs/common";
 import { BookingRepository } from "../../feature/booking/booking.repository";
 import { FlightRepository } from "../../feature/flight/flight.repository";
@@ -14,10 +14,8 @@ import { Flight } from "../../feature/flight/flight.entity";
 import { Booking } from "../../feature/booking/booking.entity";
 
 @Injectable()
-export class SeedService
-  implements OnApplicationBootstrap, OnApplicationShutdown
-{
-  private readonly logger = new Logger();
+export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
+  private readonly logger = new Logger(SeedService.name);
 
   constructor(
     private readonly bookingRepository: BookingRepository,
@@ -31,11 +29,13 @@ export class SeedService
     this.loadData().catch((e) => this.logger.error("FAILED TO LOAD DATA", e));
   }
 
-  onApplicationShutdown() {
+  async onModuleDestroy() {
     this.logger.log("DELETING DATA...");
-    this.deleteData().catch((e) =>
-      this.logger.error("FAILED TO DELETE DATA", e),
-    );
+    try {
+      await this.deleteData();
+    } catch (e) {
+      this.logger.error("FAILED TO DELETE DATA", e);
+    }
   }
 
   private async loadData() {
@@ -49,7 +49,7 @@ export class SeedService
         capacity: 257,
       },
       {
-        name: "Starship",
+        name: "SpaceX Starship",
         capacity: 100,
       },
     ];
@@ -65,12 +65,30 @@ export class SeedService
 
     const createdLocations = await this.locationRepository.save(locations);
 
+    const now = new Date();
+
+    const date1 = now;
+    date1.setDate(now.getDate() + 1);
+    date1.setHours(8, 15, 0, 0);
+
+    const date2 = new Date(now);
+    date2.setDate(now.getDate() + 2);
+    date2.setHours(13, 35, 0, 0);
+
+    const date3 = new Date(now);
+    date3.setDate(now.getDate() + 3);
+    date3.setHours(9, 25, 0, 0);
+
+    const date4 = new Date(now);
+    date4.setDate(now.getDate() + 4);
+    date4.setHours(18, 0, 0, 0);
+
     const flights: Partial<Flight>[] = [
       {
         craft: createdCrafts[0],
         start: createdLocations[0],
         destination: createdLocations[1],
-        date: new Date(),
+        date: date1,
         flightTimeInMinutes: 60,
         distanceInKm: 686,
       },
@@ -78,7 +96,7 @@ export class SeedService
         craft: createdCrafts[1],
         start: createdLocations[1],
         destination: createdLocations[0],
-        date: new Date(),
+        date: date2,
         flightTimeInMinutes: 60,
         distanceInKm: 686,
       },
@@ -86,7 +104,7 @@ export class SeedService
         craft: createdCrafts[2],
         start: createdLocations[2],
         destination: createdLocations[3],
-        date: new Date(),
+        date: date3,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
       },
@@ -94,7 +112,7 @@ export class SeedService
         craft: createdCrafts[2],
         start: createdLocations[3],
         destination: createdLocations[2],
-        date: new Date(),
+        date: date4,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
       },
@@ -116,8 +134,8 @@ export class SeedService
         flight: createdFlights[1],
       },
       {
-        firstName: "Dániel",
-        lastName: "Gergely",
+        firstName: "Klára",
+        lastName: "Szabó-Biczók",
         flight: createdFlights[2],
       },
     ];

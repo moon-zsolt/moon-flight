@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import DATA_SOURCE from "./config/typeorm-data-source.config";
@@ -8,6 +7,7 @@ import { FlightModule } from "./feature/flight/flight.module";
 import { CraftModule } from "./feature/craft/craft.module";
 import { LocationModule } from "./feature/location/location.module";
 import { SeedModule } from "./config/seed/seed.module";
+import { ApiModule } from "./api/api.module";
 
 @Module({
   imports: [
@@ -17,8 +17,9 @@ import { SeedModule } from "./config/seed/seed.module";
     LocationModule,
     CraftModule,
     SeedModule,
+    ApiModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}

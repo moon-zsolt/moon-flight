@@ -41,42 +41,62 @@ export default function AdminFlights({ flights }: AdminFlightsProps) {
 
 const columns: ColumnDef<Flight>[] = [
   {
-    accessorKey: "from",
+    accessorKey: "code",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          From
+          Code
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "to",
+    accessorKey: "craft.name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          To
+          Aircraft
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "number",
-    header: "Number",
+    id: "start",
+    accessorKey: "start.name",
+    header: "Start",
   },
   {
-    accessorKey: "when",
-    header: "When",
+    id: "destination",
+    accessorKey: "destination.name",
+    header: "Destination",
+  },
+  {
+    accessorKey: "date",
+    header: "Date",
     cell: ({ row }) => {
-      return new Date(row.getValue("when")).toLocaleString();
+      return new Date(row.getValue("date")).toLocaleString();
+    },
+  },
+  {
+    accessorKey: "flightTimeInMinutes",
+    header: "Flight Time",
+    cell: ({ row }) => {
+      return `${row.getValue("flightTimeInMinutes")} mins`;
+    },
+  },
+  {
+    accessorKey: "distanceInKm",
+    header: "Distance",
+    cell: ({ row }) => {
+      return `${row.getValue("distanceInKm")} km`;
     },
   },
 ];
@@ -103,20 +123,22 @@ function FlightsTable({ flights }: { flights: Flight[] }) {
     <div>
       <div className="flex items-center pt-4 pb-2">
         <Input
-          placeholder="Filter by from..."
-          value={(table.getColumn("from")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter by start..."
+          value={(table.getColumn("start")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("from")?.setFilterValue(event.target.value)
+            table.getColumn("start")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
       </div>
       <div className="flex items-center pt-2 pb-4">
         <Input
-          placeholder="Filter by to..."
-          value={(table.getColumn("to")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter by destination..."
+          value={
+            (table.getColumn("destination")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn("to")?.setFilterValue(event.target.value)
+            table.getColumn("destination")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

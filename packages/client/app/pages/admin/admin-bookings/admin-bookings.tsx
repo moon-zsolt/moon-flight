@@ -81,6 +81,7 @@ const columns: ColumnDef<Booking>[] = [
   {
     accessorKey: "checkedIn",
     header: "Checked In",
+    cell: ({ row }) => (row.getValue("checkedIn") ? "yes" : "no"),
   },
 ];
 

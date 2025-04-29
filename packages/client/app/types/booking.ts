@@ -7,4 +7,6 @@ export type Booking = {
   firstName: string;
   lastName: string;
   flight: Flight;
+  checkedIn: number | null;
+  seat: number | null;
 };

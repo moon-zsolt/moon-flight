@@ -38,7 +38,7 @@ const functions = [
     icon: <TicketPlus />,
   },
   {
-    href: "./find-your-booking",
+    href: "./booking",
     text: "Find Your Booking",
     icon: <Search />,
   },

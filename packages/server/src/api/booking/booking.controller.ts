@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Logger, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Logger,
+  NotFoundException,
+  Post,
+} from "@nestjs/common";
 import { BookingDto } from "./booking.dto";
 import { CreateBookingDto } from "./create-booking.dto";
 import { BookingService } from "src/feature/booking/booking.service";
+import { FindBookingDto } from "./find-booking.dto";
 
 @Controller()
 export class BookingController {
@@ -15,6 +23,21 @@ export class BookingController {
     const bookings = await this.bookingService.findAll();
 
     return bookings.map((booking) => new BookingDto(booking));
+  }
+
+  @Post("booking/find")
+  async findBooking(@Body() body: FindBookingDto): Promise<BookingDto> {
+    this.logger.log(`Finding booking ${JSON.stringify(body)}`);
+
+    const booking = await this.bookingService.find(body);
+
+    if (!booking) {
+      throw new NotFoundException(
+        `No booking found for code ${body.bookingCode} and last name ${body.lastName}`,
+      );
+    }
+
+    return new BookingDto(booking);
   }
 
   @Post("booking")

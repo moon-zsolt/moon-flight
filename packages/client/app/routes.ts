@@ -17,5 +17,6 @@ export default [
   ...prefix("user", [
     index("routes/user-home.tsx"),
     route("book", "routes/user-book.tsx"),
+    route("booking", "routes/user-booking-details.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -3,6 +3,7 @@ import { CreateBookingDto } from "src/api/booking/create-booking.dto";
 import { FlightRepository } from "../flight/flight.repository";
 import { Booking } from "./booking.entity";
 import { BookingRepository } from "./booking.repository";
+import { FindBookingDto } from "src/api/booking/find-booking.dto";
 
 @Injectable()
 export class BookingService {
@@ -18,6 +19,20 @@ export class BookingService {
       },
     });
     return bookings;
+  }
+
+  async find(dto: FindBookingDto): Promise<Booking | null> {
+    const booking = await this.bookingRepository.findOne({
+      where: {
+        code: dto.bookingCode,
+        lastName: dto.lastName,
+      },
+      relations: {
+        flight: { craft: true, start: true, destination: true },
+      },
+    });
+
+    return booking;
   }
 
   async create(dto: CreateBookingDto): Promise<Booking> {

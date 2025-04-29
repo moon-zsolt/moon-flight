@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import type { UUID } from "crypto";
 import type { Flight } from "~/types/flight";
+import { Input } from "~/components/ui/input";
 
 export type UserBookProps = {
   locations: Location[];
@@ -31,7 +32,6 @@ export function UserBook({ locations }: UserBookProps) {
   const [destinationId, setDestination] = useState<UUID>();
 
   const [flights, setFlights] = useState<Flight[]>();
-  const [flightId, setFlightId] = useState<UUID>();
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -43,6 +43,38 @@ export function UserBook({ locations }: UserBookProps) {
       .then((response) => response.json())
       .then((flights) => setFlights(flights));
   }, [startId, destinationId]);
+
+  const [flightId, setFlightId] = useState<UUID>();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  const [booking, setBooking] = useState(false);
+
+  const book = () => {
+    setBooking(true);
+
+    const body = {
+      flightId,
+      firstName,
+      lastName,
+    };
+
+    fetch("/booking", { method: "POST", body: JSON.stringify(body) })
+      .then((response) => {
+        if (response.ok) {
+          window.alert("Booking Succeded!");
+          window.history.back();
+        } else {
+          window.alert("Booking Failed!");
+        }
+      })
+      .catch(() => {
+        window.alert("Booking Failed!");
+      })
+      .finally(() => {
+        setBooking(false);
+      });
+  };
 
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
@@ -92,6 +124,31 @@ export function UserBook({ locations }: UserBookProps) {
                 selectedId={flightId}
                 onSelect={setFlightId}
               />
+            </div>
+
+            <div>
+              <Input
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Input
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Button
+                disabled={!flightId || !firstName || !lastName || booking}
+                onClick={book}
+              >
+                Book
+              </Button>
             </div>
           </nav>
         </div>

@@ -22,6 +22,8 @@ import { useEffect, useState } from "react";
 import type { UUID } from "crypto";
 import type { Flight } from "~/types/flight";
 import { Input } from "~/components/ui/input";
+import type { CreateBookingDto } from "~/types/create-booking";
+import type { Booking } from "~/types/booking";
 
 export type UserBookProps = {
   locations: Location[];
@@ -53,16 +55,30 @@ export function UserBook({ locations }: UserBookProps) {
   const book = () => {
     setBooking(true);
 
-    const body = {
+    if (!flightId) {
+      window.alert("Please select a flight!");
+      setBooking(false);
+      return;
+    }
+
+    const body: CreateBookingDto = {
       flightId,
       firstName,
       lastName,
     };
 
-    fetch("/booking", { method: "POST", body: JSON.stringify(body) })
-      .then((response) => {
+    fetch("/booking", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(async (response) => {
         if (response.ok) {
-          window.alert("Booking Succeded!");
+          const booking = (await response.json()) as Booking;
+
+          window.alert(
+            `Booking Succeded! Your booking code is ${booking.code}`
+          );
           window.history.back();
         } else {
           window.alert("Booking Failed!");

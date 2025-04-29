@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import logoDark from "./logo-dark.png";
+import logoLight from "./logo-light.png";
 
 export function Welcome() {
   return (

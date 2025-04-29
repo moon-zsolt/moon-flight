@@ -1,6 +1,8 @@
 import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 
-import { useState, type ReactNode } from "react";
+import { Clock, Code, Globe, Plane, User } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { Form } from "react-router";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -13,7 +15,6 @@ import {
 import { Input } from "~/components/ui/input";
 import type { Booking } from "~/types/booking";
 import type { FindBookingDto } from "~/types/find-booking";
-import { Clock, Code, Globe, Plane, User } from "lucide-react";
 
 type State =
   | {
@@ -33,11 +34,28 @@ type State =
       state: "error";
     };
 
-export function UserBookingDetails() {
+type UserBookingDetailsProps = {
+  checkedInBooking: Booking | null;
+};
+
+export function UserBookingDetails({
+  checkedInBooking,
+}: UserBookingDetailsProps) {
   const [bookingCode, setBookingCode] = useState("");
   const [lastName, setLastName] = useState("");
 
   const [state, setState] = useState<State>({ state: "initial" });
+
+  useEffect(() => {
+    if (
+      checkedInBooking &&
+      state.state === "found" &&
+      state.booking.id === checkedInBooking.id &&
+      state.booking.checkedIn !== checkedInBooking.checkedIn
+    ) {
+      setState({ state: "found", booking: checkedInBooking });
+    }
+  }, [state, checkedInBooking]);
 
   const findBooking = () => {
     setState({ state: "finding" });
@@ -187,7 +205,23 @@ function BookingDetails({ booking }: BookingDetailsProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button>Check In</Button>
+        {booking.checkedIn && (
+          <p className="text-green-500">
+            You're checked in! Your seat number is {booking.seat}
+          </p>
+        )}
+        {!booking.checkedIn && (
+          <Form method="post">
+            <input
+              className="invisible"
+              type="text"
+              name="bookingId"
+              value={booking.id}
+              readOnly
+            />
+            <Button type="submit">Check In</Button>
+          </Form>
+        )}
       </CardFooter>
     </Card>
   );

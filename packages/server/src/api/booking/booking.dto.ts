@@ -9,7 +9,7 @@ export class BookingDto {
     this.firstName = booking.firstName;
     this.lastName = booking.lastName;
     this.flight = booking.flight;
-    this.checkedIn = booking.checkedIn;
+    this.checkedIn = !!booking.checkedIn;
     this.seat = booking.seat;
   }
 
@@ -23,7 +23,7 @@ export class BookingDto {
 
   flight: FlightDto;
 
-  checkedIn: number | null;
+  checkedIn: boolean;
 
   seat: number | null;
 }

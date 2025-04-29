@@ -91,6 +91,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         date: date1,
         flightTimeInMinutes: 60,
         distanceInKm: 686,
+        emptySeats: createdCrafts[0].capacity,
       },
       {
         craft: createdCrafts[1],
@@ -99,6 +100,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         date: date2,
         flightTimeInMinutes: 60,
         distanceInKm: 686,
+        emptySeats: createdCrafts[1].capacity,
       },
       {
         craft: createdCrafts[2],
@@ -107,6 +109,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         date: date3,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
+        emptySeats: createdCrafts[2].capacity,
       },
       {
         craft: createdCrafts[2],
@@ -115,6 +118,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         date: date4,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
+        emptySeats: createdCrafts[2].capacity,
       },
     ];
 

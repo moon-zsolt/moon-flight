@@ -27,8 +27,8 @@ export class Booking {
   @JoinColumn()
   flight: Flight;
 
-  @Column({ nullable: true, type: "integer" })
-  checkedIn: number | null;
+  @Column({ nullable: false })
+  checkedIn: number;
 
   @Column({ nullable: true, type: "integer" })
   seat: number | null;

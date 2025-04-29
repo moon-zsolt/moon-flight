@@ -71,6 +71,7 @@ export class BookingService {
 
     booking.checkedIn = 1;
     booking.seat = await this.getSeat(booking.flight);
+    booking.flight.emptySeats = -1;
 
     await this.bookingRepository.save(booking);
 

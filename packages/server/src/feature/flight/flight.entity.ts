@@ -39,6 +39,9 @@ export class Flight {
   @Column({ nullable: false })
   distanceInKm: number;
 
+  @Column({ nullable: false })
+  emptySeats: number;
+
   @BeforeInsert()
   private generateFlightCode() {
     this.code = "MF" + randomUUID().slice(0, 4).toUpperCase();

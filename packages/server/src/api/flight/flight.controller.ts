@@ -12,7 +12,10 @@ export class FlightController {
     @Query("startId") startId: UUID,
     @Query("destinationId") destinationId: UUID,
   ) {
-    const flights = await this.flightService.find(startId, destinationId);
+    const flights = await this.flightService.findBookable(
+      startId,
+      destinationId,
+    );
 
     return flights.map((flight) => new FlightDto(flight));
   }

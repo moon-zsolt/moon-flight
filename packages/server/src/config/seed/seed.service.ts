@@ -59,6 +59,13 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
     const locations: Partial<Location>[] = [
       { name: "Budapest" },
       { name: "Berlin" },
+      { name: "London" },
+      { name: "Paris" },
+      { name: "Madrid" },
+      { name: "Rome" },
+      { name: "Warsaw" },
+      { name: "Prague" },
+      { name: "Vienna" },
       { name: "Boca Chica" },
       { name: "Moon" },
     ];
@@ -84,6 +91,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
     date4.setHours(18, 0, 0, 0);
 
     const flights: Partial<Flight>[] = [
+      //BUD > BER
       {
         craft: createdCrafts[0],
         start: createdLocations[0],
@@ -93,19 +101,60 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         distanceInKm: 686,
         emptySeats: createdCrafts[0].capacity,
       },
+      //BER > BUD
       {
-        craft: createdCrafts[1],
+        craft: createdCrafts[0],
         start: createdLocations[1],
         destination: createdLocations[0],
         date: date2,
         flightTimeInMinutes: 60,
         distanceInKm: 686,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //BUD > LON
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[0],
+        destination: createdLocations[2],
+        date: date1,
+        flightTimeInMinutes: 160,
+        distanceInKm: 1493,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //LON > BUD
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[2],
+        destination: createdLocations[0],
+        date: date2,
+        flightTimeInMinutes: 160,
+        distanceInKm: 1493,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //BUD > PAR
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[0],
+        destination: createdLocations[3],
+        date: date1,
+        flightTimeInMinutes: 145,
+        distanceInKm: 1244,
+        emptySeats: createdCrafts[1].capacity,
+      },
+      //PAR > BUD
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[3],
+        destination: createdLocations[0],
+        date: date2,
+        flightTimeInMinutes: 145,
+        distanceInKm: 1244,
         emptySeats: createdCrafts[1].capacity,
       },
       {
         craft: createdCrafts[2],
-        start: createdLocations[2],
-        destination: createdLocations[3],
+        start: createdLocations[8],
+        destination: createdLocations[9],
         date: date3,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
@@ -113,8 +162,8 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
       },
       {
         craft: createdCrafts[2],
-        start: createdLocations[3],
-        destination: createdLocations[2],
+        start: createdLocations[9],
+        destination: createdLocations[8],
         date: date4,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,

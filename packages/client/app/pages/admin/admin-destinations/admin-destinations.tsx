@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useState } from "react";
+import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
@@ -32,6 +33,7 @@ export default function AdminDestinations({
 }: AdminDestinationsProps) {
   return (
     <main className="m-24">
+      <MoonFlightLogo />
       <header className="my-16">
         <h1 className="text-2xl">Destinations</h1>
       </header>

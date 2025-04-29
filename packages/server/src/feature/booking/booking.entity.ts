@@ -27,8 +27,14 @@ export class Booking {
   @JoinColumn()
   flight: Flight;
 
+  @Column({ nullable: true, type: "integer" })
+  checkedIn: number | null;
+
+  @Column({ nullable: true, type: "integer" })
+  seat: number | null;
+
   @BeforeInsert()
-  private generateFlightCode() {
+  private generateBookingCode() {
     this.code = randomUUID().slice(0, 8).toUpperCase();
   }
 }

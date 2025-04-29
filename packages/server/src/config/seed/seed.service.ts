@@ -127,16 +127,19 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         firstName: "Péter",
         lastName: "Polena",
         flight: createdFlights[0],
+        checkedIn: 0,
       },
       {
         firstName: "Zsolt",
         lastName: "Világos",
         flight: createdFlights[1],
+        checkedIn: 0,
       },
       {
         firstName: "Klára",
         lastName: "Szabó-Biczók",
         flight: createdFlights[2],
+        checkedIn: 0,
       },
     ];
 

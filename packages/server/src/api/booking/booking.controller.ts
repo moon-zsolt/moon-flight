@@ -4,12 +4,14 @@ import {
   Get,
   Logger,
   NotFoundException,
+  Param,
   Post,
 } from "@nestjs/common";
 import { BookingDto } from "./booking.dto";
 import { CreateBookingDto } from "./create-booking.dto";
 import { BookingService } from "src/feature/booking/booking.service";
 import { FindBookingDto } from "./find-booking.dto";
+import { UUID } from "crypto";
 
 @Controller()
 export class BookingController {
@@ -47,5 +49,14 @@ export class BookingController {
     const booking = await this.bookingService.create(body);
 
     return new BookingDto(booking);
+  }
+
+  @Post("booking/:id/check-in")
+  async checkIn(@Param("id") id: string): Promise<BookingDto> {
+    this.logger.log(`Checking-in booking ${JSON.stringify(id)}`);
+
+    const checkedInBooking = await this.bookingService.checkIn(id as UUID);
+
+    return new BookingDto(checkedInBooking);
   }
 }

@@ -9,6 +9,8 @@ export class BookingDto {
     this.firstName = booking.firstName;
     this.lastName = booking.lastName;
     this.flight = booking.flight;
+    this.checkedIn = booking.checkedIn;
+    this.seat = booking.seat;
   }
 
   id: UUID;
@@ -20,4 +22,8 @@ export class BookingDto {
   lastName: string;
 
   flight: FlightDto;
+
+  checkedIn: number | null;
+
+  seat: number | null;
 }

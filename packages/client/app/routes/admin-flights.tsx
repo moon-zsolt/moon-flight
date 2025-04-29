@@ -1,27 +1,6 @@
 import AdminFlights from "~/pages/admin/admin-flights/admin-flights";
 import type { Route } from "./+types/admin-flights";
-import type { UUID } from "crypto";
-
-export type Flights = Flight[];
-export type Flight = {
-  id: UUID;
-  code: string;
-  craft: {
-    id: UUID;
-    name: string;
-    capacity: number;
-  };
-  start: Location;
-  destination: Location;
-  date: string;
-  flightTimeInMinutes: number;
-  distanceInKm: number;
-};
-
-export type Location = {
-  id: UUID;
-  name: string;
-};
+import type { Flight } from "~/types/flight";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -34,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
 export async function clientLoader() {
   let flights = await fetch("/flight");
 
-  return (await flights.json()) as Flights;
+  return (await flights.json()) as Flight[];
 }
 
 export default function AdminDestinationsRoute({

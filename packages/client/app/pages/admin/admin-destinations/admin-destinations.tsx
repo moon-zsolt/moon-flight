@@ -14,6 +14,8 @@ import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
+import type { Location } from "~/types/location";
+
 import {
   Table,
   TableBody,
@@ -22,10 +24,9 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { Destination, Destinations } from "~/routes/admin-destinations";
 
 export type AdminDestinationsProps = {
-  destinations: Destinations;
+  destinations: Location[];
 };
 
 export default function AdminDestinations({
@@ -43,7 +44,7 @@ export default function AdminDestinations({
   );
 }
 
-const columns: ColumnDef<Destination>[] = [
+const columns: ColumnDef<Location>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -61,14 +62,13 @@ const columns: ColumnDef<Destination>[] = [
   {
     accessorKey: "country",
     header: "Country",
-  },
-  {
-    accessorKey: "planet",
-    header: "Planet",
+    cell: () => {
+      return "TBD";
+    },
   },
 ];
 
-function DestinationsTable({ destinations }: { destinations: Destination[] }) {
+function DestinationsTable({ destinations }: { destinations: Location[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 

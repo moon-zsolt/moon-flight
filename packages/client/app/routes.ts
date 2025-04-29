@@ -14,5 +14,8 @@ export default [
     route("flights", "routes/admin-flights.tsx"),
     route("bookings", "routes/admin-bookings.tsx"),
   ]),
-  ...prefix("user", [index("routes/user-home.tsx")]),
+  ...prefix("user", [
+    index("routes/user-home.tsx"),
+    route("book", "routes/user-book.tsx"),
+  ]),
 ] satisfies RouteConfig;

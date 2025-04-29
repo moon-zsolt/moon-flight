@@ -13,7 +13,6 @@ import { useState } from "react";
 import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-
 import {
   Table,
   TableBody,
@@ -22,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { Flight, Flights } from "~/routes/admin-flights";
+import type { Flight } from "~/types/flight";
 
 export type AdminFlightsProps = {
-  flights: Flights;
+  flights: Flight[];
 };
 
 export default function AdminFlights({ flights }: AdminFlightsProps) {

@@ -7,12 +7,12 @@ export function MoonFlightLogo() {
       <div className="w-[500px] max-w-[100vw] p-4">
         <img
           src={logoLight}
-          alt="React Router"
+          alt="Moon Flight Logo Light"
           className="block w-full dark:hidden"
         />
         <img
           src={logoDark}
-          alt="React Router"
+          alt="Moon Flight Logo Dark"
           className="hidden w-full dark:block"
         />
       </div>

@@ -1,18 +1,36 @@
 import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 import type { Booking } from "~/types/booking";
 import type { FindBookingDto } from "~/types/find-booking";
+import { Clock, Code, Globe, Plane, User } from "lucide-react";
 
 type State =
   | {
-      state: "initial" | "finding" | "found" | "not-found" | "error";
+      state: "initial";
+    }
+  | {
+      state: "finding";
     }
   | {
       state: "found";
       booking: Booking;
+    }
+  | {
+      state: "not-found";
+    }
+  | {
+      state: "error";
     };
 
 export function UserBookingDetails() {
@@ -39,6 +57,8 @@ export function UserBookingDetails() {
           const booking = (await response.json()) as Booking;
 
           setState({ state: "found", booking });
+        } else if (response.status === 404) {
+          setState({ state: "not-found" });
         } else {
           setState({ state: "error" });
         }
@@ -87,9 +107,102 @@ export function UserBookingDetails() {
                 Find Booking
               </Button>
             </div>
+
+            <div>
+              {state.state === "finding" && (
+                <p className="text-gray-700 dark:text-gray-200">
+                  Finding your booking...
+                </p>
+              )}
+              {state.state === "not-found" && (
+                <p className="text-red-500">Booking not found</p>
+              )}
+              {state.state === "error" && (
+                <p className="text-red-500">An error occurred</p>
+              )}
+              {state.state === "found" && (
+                <BookingDetails booking={state.booking} />
+              )}
+            </div>
           </nav>
         </div>
       </div>
     </main>
+  );
+}
+
+type BookingDetailsProps = {
+  booking: Booking;
+};
+
+function BookingDetails({ booking }: BookingDetailsProps) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Booking Details</CardTitle>
+        <CardDescription>Here's Your Booking</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2">
+          <BookingDetail
+            icon={<Code className="inline-block" />}
+            title="Booking Code"
+            data={booking.code}
+          />
+          <BookingDetail
+            icon={<User className="inline-block" />}
+            title="Passenger"
+            data={`${booking.firstName} ${booking.lastName}`}
+          />
+          <BookingDetail
+            icon={<Code className="inline-block" />}
+            title="Flight Code"
+            data={booking.flight.code}
+          />
+          <BookingDetail
+            icon={<Code className="inline-block" />}
+            title="Start"
+            data={booking.flight.start.name}
+          />
+          <BookingDetail
+            icon={<Code className="inline-block" />}
+            title="Destination"
+            data={booking.flight.destination.name}
+          />
+          <BookingDetail
+            icon={<Plane className="inline-block" />}
+            title="Aircraft"
+            data={`${booking.flight.craft.name} (${booking.flight.craft.capacity} seats)`}
+          />
+          <BookingDetail
+            icon={<Clock className="inline-block" />}
+            title="Flight Time"
+            data={`${booking.flight.flightTimeInMinutes} minutes`}
+          />
+          <BookingDetail
+            icon={<Globe className="inline-block" />}
+            title="Distance"
+            data={`${booking.flight.distanceInKm} km`}
+          />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button>Check In</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+type BookingDetailProps = {
+  icon: ReactNode;
+  title: string;
+  data: string;
+};
+
+function BookingDetail({ icon, title, data }: BookingDetailProps) {
+  return (
+    <div>
+      {icon} {title}: {data}
+    </div>
   );
 }

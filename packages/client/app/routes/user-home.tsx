@@ -1,3 +1,4 @@
+import { UserHome } from "~/pages/user/user-home/user-home";
 import type { Route } from "./+types/user-home";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function UserHomeRoute() {
-  return "User";
+  return <UserHome />;
 }

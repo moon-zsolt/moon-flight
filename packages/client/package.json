@@ -1,5 +1,5 @@
 {
-  "name": "moon-flight-web",
+  "name": "@moon-flight/client",
   "private": true,
   "type": "module",
   "scripts": {

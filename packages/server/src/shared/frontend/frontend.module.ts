@@ -15,7 +15,8 @@ export class FrontendModule {
       imports.push(FrontendProxyModule);
     } else {
       const options: ServeStaticModuleOptions = {
-        rootPath: join(__dirname, "../../../../client/build/client"),
+        // Needs double client because omitting client from react-router build config will empty packages and delete server build.
+        rootPath: join(__dirname, "../../../client/client"),
       };
 
       imports.push(ServeStaticModule.forRoot(options));

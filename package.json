@@ -1,0 +1,19 @@
+{
+  "name": "@moon-flight/moon-flight",
+  "version": "0.0.1",
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moon-zsolt/moon-flight"
+  },
+  "workspaces": [
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "server": "npm run -w @moon-flight/server",
+    "client": "npm run -w @moon-flight/client",
+    "build": "npm run server build && npm run client build",
+    "start": "npm run server start"
+  }
+}

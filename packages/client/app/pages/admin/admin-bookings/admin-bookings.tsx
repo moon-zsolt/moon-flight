@@ -22,10 +22,10 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { Booking, Bookings } from "~/routes/admin-bookings";
+import type { Booking } from "~/types/booking";
 
 export type AdminBookingsProps = {
-  bookings: Bookings;
+  bookings: Booking[];
 };
 
 export default function AdminBookings({ bookings }: AdminBookingsProps) {
@@ -71,12 +71,12 @@ const columns: ColumnDef<Booking>[] = [
     },
   },
   {
-    accessorKey: "flightNumber",
-    header: "Flight Number",
+    accessorKey: "code",
+    header: "Booking Code",
   },
   {
-    accessorKey: "bookingNumber",
-    header: "Booking Number",
+    accessorKey: "flight.code",
+    header: "Flight Code",
   },
   {
     accessorKey: "checkedIn",
@@ -88,13 +88,8 @@ function BookingsTable({ bookings }: { bookings: Booking[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const bookingsForTable = useMemo(
-    () => bookings.map((b) => ({ ...b, ...b.passenger })),
-    [bookings]
-  );
-
   const table = useReactTable({
-    data: bookingsForTable,
+    data: bookings,
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),

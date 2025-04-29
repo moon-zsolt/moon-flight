@@ -11,6 +11,15 @@ export class BookingService {
     private readonly flightRepository: FlightRepository,
   ) {}
 
+  async findAll(): Promise<Booking[]> {
+    const bookings = await this.bookingRepository.find({
+      relations: {
+        flight: true,
+      },
+    });
+    return bookings;
+  }
+
   async create(dto: CreateBookingDto): Promise<Booking> {
     const flight = await this.flightRepository.findOneByOrFail({
       id: dto.flightId,

@@ -1,16 +1,6 @@
 import AdminBookings from "~/pages/admin/admin-bookings/admin-bookings";
 import type { Route } from "./+types/admin-bookings";
-
-export type Bookings = Booking[];
-export type Booking = {
-  bookingNumber: string;
-  flightNumber: string;
-  passenger: {
-    firstName: string;
-    lastName: string;
-  };
-  checkedIn: boolean;
-};
+import type { Booking } from "~/types/booking";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,9 +11,9 @@ export function meta({}: Route.MetaArgs) {
 
 // provides `loaderData` to the component
 export async function clientLoader() {
-  let bookings = await fetch("/bookings.json");
+  let bookings = await fetch("/booking");
 
-  return (await bookings.json()) as Bookings;
+  return (await bookings.json()) as Booking[];
 }
 
 export default function AdminDestinationsRoute({

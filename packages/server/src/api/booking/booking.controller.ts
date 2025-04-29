@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post } from "@nestjs/common";
+import { Body, Controller, Get, Logger, Post } from "@nestjs/common";
 import { BookingDto } from "./booking.dto";
 import { CreateBookingDto } from "./create-booking.dto";
 import { BookingService } from "src/feature/booking/booking.service";
@@ -8,6 +8,14 @@ export class BookingController {
   private readonly logger = new Logger(BookingController.name);
 
   constructor(private readonly bookingService: BookingService) {}
+
+  @Get("booking")
+  async getBookings(): Promise<BookingDto[]> {
+    this.logger.log("Getting all bookings");
+    const bookings = await this.bookingService.findAll();
+
+    return bookings.map((booking) => new BookingDto(booking));
+  }
 
   @Post("booking")
   async createBooking(@Body() body: CreateBookingDto): Promise<BookingDto> {

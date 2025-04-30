@@ -2,21 +2,22 @@ import { Injectable } from "@nestjs/common";
 import { FlightRepository } from "./flight.repository";
 import { Flight } from "./flight.entity";
 import { UUID } from "crypto";
-import { Equal, Not } from "typeorm";
+import { MoreThanOrEqual } from "typeorm";
 
 @Injectable()
 export class FlightService {
   constructor(private readonly flightRepository: FlightRepository) {}
 
-  findBookable(
+  find(
     startId: UUID | undefined,
     destinationId: UUID | undefined,
+    onlyBookable: boolean | undefined,
   ): Promise<Flight[]> {
     return this.flightRepository.find({
       where: {
         start: { id: startId },
         destination: { id: destinationId },
-        emptySeats: Not(Equal(0)),
+        emptySeats: onlyBookable ? MoreThanOrEqual(1) : MoreThanOrEqual(0),
       },
       relations: { start: true, destination: true, craft: true },
     });

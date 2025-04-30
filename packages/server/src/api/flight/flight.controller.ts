@@ -11,10 +11,12 @@ export class FlightController {
   async getFlights(
     @Query("startId") startId: UUID,
     @Query("destinationId") destinationId: UUID,
+    @Query("onlyBookable") onlyBookable: string,
   ) {
-    const flights = await this.flightService.findBookable(
+    const flights = await this.flightService.find(
       startId,
       destinationId,
+      onlyBookable === "true" ? true : false,
     );
 
     return flights.map((flight) => new FlightDto(flight));

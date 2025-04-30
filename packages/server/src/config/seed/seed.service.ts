@@ -66,7 +66,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
       { name: "Warsaw" },
       { name: "Prague" },
       { name: "Vienna" },
-      { name: "Boca Chica" },
+      { name: "Athens" },
       { name: "Moon" },
     ];
 
@@ -151,19 +151,21 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         distanceInKm: 1244,
         emptySeats: createdCrafts[1].capacity,
       },
+      //BUD > MOO
       {
         craft: createdCrafts[2],
-        start: createdLocations[8],
-        destination: createdLocations[9],
+        start: createdLocations[1],
+        destination: createdLocations[10],
         date: date3,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
         emptySeats: createdCrafts[2].capacity,
       },
+      //MOO > BUD
       {
         craft: createdCrafts[2],
-        start: createdLocations[9],
-        destination: createdLocations[8],
+        start: createdLocations[10],
+        destination: createdLocations[1],
         date: date4,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,

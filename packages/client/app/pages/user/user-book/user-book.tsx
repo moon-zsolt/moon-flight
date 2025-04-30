@@ -62,6 +62,7 @@ export function UserBook({ locations }: UserBookProps) {
 
     params.append("startId", startId);
     params.append("destinationId", destinationId);
+    params.append("onlyBookable", "true");
 
     fetch(`/flight?${params}`)
       .then((response) => response.json())

@@ -43,7 +43,13 @@ export function UserBook({ locations }: UserBookProps) {
 
     fetch(`/flight?${params}`)
       .then((response) => response.json())
-      .then((flights) => setFlights(flights));
+      .then((flights: Flight[]) => {
+        setFlights(flights);
+
+        if (!flights.some((flight) => flight.id === flightId)) {
+          setFlightId(undefined);
+        }
+      });
   }, [startId, destinationId]);
 
   const [flightId, setFlightId] = useState<UUID>();

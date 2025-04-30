@@ -57,16 +57,16 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
     const createdCrafts = await this.craftRepository.save(crafts);
 
     const locations: Partial<Location>[] = [
-      { name: "Budapest" },
-      { name: "Berlin" },
-      { name: "London" },
-      { name: "Paris" },
-      { name: "Madrid" },
-      { name: "Rome" },
-      { name: "Warsaw" },
-      { name: "Prague" },
-      { name: "Vienna" },
-      { name: "Athens" },
+      { name: "Budapest (HUN)" },
+      { name: "Berlin (DEU)" },
+      { name: "London (GBR)" },
+      { name: "Paris (FRA)" },
+      { name: "Madrid (ESP)" },
+      { name: "Rome (ITA)" },
+      { name: "Warsaw (POL)" },
+      { name: "Prague (CZE)" },
+      { name: "Vienna (AUT)" },
+      { name: "Athens (GRC)" },
       { name: "Moon" },
     ];
 

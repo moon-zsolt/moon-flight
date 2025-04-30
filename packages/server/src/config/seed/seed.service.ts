@@ -49,7 +49,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         capacity: 257,
       },
       {
-        name: "SpaceX Starship",
+        name: "ŰrIksz Csillaghajó",
         capacity: 100,
       },
     ];

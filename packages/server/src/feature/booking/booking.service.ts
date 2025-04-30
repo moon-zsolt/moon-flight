@@ -46,6 +46,7 @@ export class BookingService {
       firstName: dto.firstName,
       lastName: dto.lastName,
       flight,
+      checkedIn: 0,
     };
 
     const bookingSaved = await this.bookingRepository.save(

@@ -29,9 +29,9 @@ export type AdminFlightsProps = {
 
 export default function AdminFlights({ flights }: AdminFlightsProps) {
   return (
-    <main className="m-24">
+    <main className="m-4 lg:m-24">
         <MoonFlightLogo />
-        <header className="my-16">
+        <header className="my-4 lg:my-16">
         <h1 className="text-2xl">Flights</h1>
       </header>
 

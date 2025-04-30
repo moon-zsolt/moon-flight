@@ -99,8 +99,8 @@ export function UserBook({ locations }: UserBookProps) {
   };
 
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
+    <main className="flex items-center justify-center pt-4 lg:pt-16 pb-4">
+      <div className="flex-1 flex flex-col items-center gap-4 lg:gap-16 min-h-0">
         <MoonFlightLogo />
         <div className="max-w-[600px] w-full space-y-6 px-4">
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
@@ -113,7 +113,7 @@ export function UserBook({ locations }: UserBookProps) {
 
             <div>
               <Combo
-                className="min-w-[200px]"
+                className="w-[200px] lg:min-w-[300px]"
                 role="start"
                 options={locations}
                 labelSelector={(location) => location.name}
@@ -124,7 +124,7 @@ export function UserBook({ locations }: UserBookProps) {
 
             <div>
               <Combo
-                className="min-w-[200px]"
+                className="w-[200px] lg:min-w-[300px]"
                 role="destination"
                 options={locations}
                 labelSelector={(location) => location.name}
@@ -135,13 +135,18 @@ export function UserBook({ locations }: UserBookProps) {
 
             <div>
               <Combo
-                className="min-w-[400px]"
+                className="w-[300px] lg:min-w-[500px]"
                 role="flight"
                 options={flights ?? []}
                 labelSelector={(flight) => {
                   const date = new Date(flight.date);
 
                   return `${flight.code} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}, ${flight.emptySeats} seats left`;
+                }}
+                shortLabelSelector={(flight) => {
+                  const date = new Date(flight.date);
+
+                  return `${flight.code} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
                 }}
                 selectedId={flightId}
                 onSelect={setFlightId}
@@ -184,6 +189,7 @@ type ComboProps<T extends { id: UUID }> = {
   role: string;
   options: T[];
   labelSelector: (item: T) => string;
+  shortLabelSelector?: (item: T) => string;
   selectedId: UUID | undefined;
   onSelect: (id: UUID | undefined) => void;
 };
@@ -193,10 +199,13 @@ export function Combo<T extends { id: UUID }>({
   role,
   options,
   labelSelector,
+  shortLabelSelector,
   selectedId,
   onSelect,
 }: ComboProps<T>) {
   const [open, setOpen] = useState(false);
+
+  const buttonLabelSelector = shortLabelSelector ?? labelSelector;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -208,7 +217,7 @@ export function Combo<T extends { id: UUID }>({
           className={`${className} justify-between`}
         >
           {selectedId
-            ? labelSelector(
+            ? buttonLabelSelector(
                 options.find((location) => location.id === selectedId)!
               )
             : `Select ${role}...`}

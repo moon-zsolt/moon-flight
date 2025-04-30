@@ -1,6 +1,6 @@
 import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 
-import { Clock, Code, Globe, Plane, User } from "lucide-react";
+import { Clock, Code, Globe, MapPin, Plane, Ticket, User } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Form } from "react-router";
 import { Button } from "~/components/ui/button";
@@ -87,8 +87,8 @@ export function UserBookingDetails({
   };
 
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
+    <main className="flex items-center justify-center pt-4 lg:pt-16 pb-4">
+      <div className="flex-1 flex flex-col items-center gap-4 lg:gap-16 min-h-0">
         <MoonFlightLogo />
         <div className="max-w-[600px] w-full space-y-6 px-4">
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
@@ -161,9 +161,9 @@ function BookingDetails({ booking }: BookingDetailsProps) {
         <CardDescription>Here's Your Booking</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
           <BookingDetail
-            icon={<Code className="inline-block" />}
+            icon={<Ticket className="inline-block" />}
             title="Booking Code"
             data={booking.code}
           />
@@ -173,17 +173,12 @@ function BookingDetails({ booking }: BookingDetailsProps) {
             data={`${booking.firstName} ${booking.lastName}`}
           />
           <BookingDetail
-            icon={<Code className="inline-block" />}
-            title="Flight Code"
-            data={booking.flight.code}
-          />
-          <BookingDetail
-            icon={<Code className="inline-block" />}
+            icon={<MapPin className="inline-block" />}
             title="Start"
             data={booking.flight.start.name}
           />
           <BookingDetail
-            icon={<Code className="inline-block" />}
+            icon={<MapPin className="inline-block" />}
             title="Destination"
             data={booking.flight.destination.name}
           />
@@ -191,6 +186,11 @@ function BookingDetails({ booking }: BookingDetailsProps) {
             icon={<Plane className="inline-block" />}
             title="Aircraft"
             data={`${booking.flight.craft.name} (${booking.flight.craft.capacity} seats)`}
+          />
+          <BookingDetail
+            icon={<Code className="inline-block" />}
+            title="Flight Code"
+            data={booking.flight.code}
           />
           <BookingDetail
             icon={<Clock className="inline-block" />}
@@ -213,7 +213,7 @@ function BookingDetails({ booking }: BookingDetailsProps) {
         {!booking.checkedIn && (
           <Form method="post">
             <input
-              className="invisible"
+              className="hidden"
               type="text"
               name="bookingId"
               value={booking.id}

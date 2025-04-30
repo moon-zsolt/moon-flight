@@ -36,10 +36,15 @@ export function UserBook({ locations }: UserBookProps) {
   const [flights, setFlights] = useState<Flight[]>();
 
   useEffect(() => {
+    if (!startId || !destinationId) {
+      setFlightId(undefined);
+      return;
+    }
+
     const params = new URLSearchParams();
 
-    if (startId) params.append("startId", startId);
-    if (destinationId) params.append("destinationId", destinationId);
+    params.append("startId", startId);
+    params.append("destinationId", destinationId);
 
     fetch(`/flight?${params}`)
       .then((response) => response.json())
@@ -150,6 +155,7 @@ export function UserBook({ locations }: UserBookProps) {
                 }}
                 selectedId={flightId}
                 onSelect={setFlightId}
+                disabled={!startId || !destinationId}
               />
             </div>
 
@@ -192,6 +198,7 @@ type ComboProps<T extends { id: UUID }> = {
   shortLabelSelector?: (item: T) => string;
   selectedId: UUID | undefined;
   onSelect: (id: UUID | undefined) => void;
+  disabled?: boolean;
 };
 
 export function Combo<T extends { id: UUID }>({
@@ -202,6 +209,7 @@ export function Combo<T extends { id: UUID }>({
   shortLabelSelector,
   selectedId,
   onSelect,
+  disabled,
 }: ComboProps<T>) {
   const [open, setOpen] = useState(false);
 
@@ -211,10 +219,11 @@ export function Combo<T extends { id: UUID }>({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          className={`${className} justify-between`}
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={`${className} justify-between`}
+          disabled={disabled}
         >
           {selectedId
             ? buttonLabelSelector(

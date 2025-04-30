@@ -62,13 +62,6 @@ const columns: ColumnDef<Location>[] = [
       );
     },
   },
-  {
-    accessorKey: "country",
-    header: "Country",
-    cell: () => {
-      return "TBD";
-    },
-  },
 ];
 
 function DestinationsTable({ destinations }: { destinations: Location[] }) {

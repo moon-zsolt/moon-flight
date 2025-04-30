@@ -13,6 +13,7 @@ export class FlightDto {
     this.date = new Date(flight.date);
     this.flightTimeInMinutes = flight.flightTimeInMinutes;
     this.distanceInKm = flight.distanceInKm;
+    this.emptySeats = flight.emptySeats;
   }
 
   id: UUID;
@@ -30,4 +31,6 @@ export class FlightDto {
   flightTimeInMinutes: number;
 
   distanceInKm: number;
+
+  emptySeats: number;
 }

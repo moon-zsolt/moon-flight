@@ -135,7 +135,7 @@ export function UserBook({ locations }: UserBookProps) {
                 labelSelector={(flight) => {
                   const date = new Date(flight.date);
 
-                  return `${flight.code} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+                  return `${flight.code} on ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}, ${flight.emptySeats} seats left`;
                 }}
                 selectedId={flightId}
                 onSelect={setFlightId}

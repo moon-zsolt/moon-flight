@@ -15,4 +15,5 @@ export type Flight = {
   date: string;
   flightTimeInMinutes: number;
   distanceInKm: number;
+  emptySeats: number;
 };

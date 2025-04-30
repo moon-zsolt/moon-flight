@@ -100,6 +100,10 @@ const columns: ColumnDef<Flight>[] = [
       return `${row.getValue("distanceInKm")} km`;
     },
   },
+  {
+    accessorKey: "emptySeats",
+    header: "Empty Seats",
+  },
 ];
 
 function FlightsTable({ flights }: { flights: Flight[] }) {

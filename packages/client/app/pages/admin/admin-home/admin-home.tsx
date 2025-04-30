@@ -1,5 +1,6 @@
 import { MapPinHouse, Plane, Tickets } from "lucide-react";
 import { NavLink } from "react-router";
+import { Becker } from "~/components/custom/becker/becker";
 import { MoonFlightLogo } from "~/components/custom/moon-flight-logo/moon-flight-logo";
 
 export function AdminHome() {
@@ -8,6 +9,7 @@ export function AdminHome() {
       <div className="flex-1 flex flex-col items-center gap-4 lg:gap-16 min-h-0">
         <MoonFlightLogo />
         <div className="max-w-[300px] w-full space-y-6 px-4">
+          <Becker />
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
             <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
               Select Function

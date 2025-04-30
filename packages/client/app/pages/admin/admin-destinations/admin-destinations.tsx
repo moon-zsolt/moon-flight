@@ -24,6 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { Becker } from "~/components/custom/becker/becker";
 
 export type AdminDestinationsProps = {
   destinations: Location[];
@@ -35,9 +36,11 @@ export default function AdminDestinations({
   return (
     <main className="m-4 lg:m-24">
       <MoonFlightLogo />
-      <header className="my-4 lg:my-16">
+      <header className="my-4 lg:my-8">
         <h1 className="text-2xl">Destinations</h1>
       </header>
+
+      <Becker />
 
       <DestinationsTable destinations={destinations} />
     </main>

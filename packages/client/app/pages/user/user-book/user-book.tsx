@@ -24,6 +24,7 @@ import type { Flight } from "~/types/flight";
 import { Input } from "~/components/ui/input";
 import type { CreateBookingDto } from "~/types/create-booking";
 import type { Booking } from "~/types/booking";
+import { Becker } from "~/components/custom/becker/becker";
 
 export type UserBookProps = {
   locations: Location[];
@@ -124,6 +125,7 @@ export function UserBook({ locations }: UserBookProps) {
       <div className="flex-1 flex flex-col items-center gap-4 lg:gap-16 min-h-0">
         <MoonFlightLogo />
         <div className="max-w-[600px] w-full space-y-6 px-4">
+          <Becker />
           <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
             <h2 className="leading-6 text-2xl text-gray-700 dark:text-gray-200 font-bold">
               Find your flight!

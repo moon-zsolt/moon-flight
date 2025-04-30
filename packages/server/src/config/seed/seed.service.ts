@@ -111,32 +111,34 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         distanceInKm: 686,
         emptySeats: createdCrafts[0].capacity,
       },
+      ///////////
       //BUD > LON
       {
-        craft: createdCrafts[0],
+        craft: createdCrafts[1],
         start: createdLocations[0],
         destination: createdLocations[2],
         date: date1,
         flightTimeInMinutes: 160,
         distanceInKm: 1493,
-        emptySeats: createdCrafts[0].capacity,
+        emptySeats: createdCrafts[1].capacity,
       },
       //LON > BUD
       {
-        craft: createdCrafts[0],
+        craft: createdCrafts[1],
         start: createdLocations[2],
         destination: createdLocations[0],
         date: date2,
         flightTimeInMinutes: 160,
         distanceInKm: 1493,
-        emptySeats: createdCrafts[0].capacity,
+        emptySeats: createdCrafts[1].capacity,
       },
+      ///////////
       //BUD > PAR
       {
         craft: createdCrafts[1],
         start: createdLocations[0],
         destination: createdLocations[3],
-        date: date1,
+        date: date2,
         flightTimeInMinutes: 145,
         distanceInKm: 1244,
         emptySeats: createdCrafts[1].capacity,
@@ -146,17 +148,144 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
         craft: createdCrafts[1],
         start: createdLocations[3],
         destination: createdLocations[0],
-        date: date2,
+        date: date4,
         flightTimeInMinutes: 145,
         distanceInKm: 1244,
         emptySeats: createdCrafts[1].capacity,
       },
+      ///////////
+      //BUD > MAD
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[0],
+        destination: createdLocations[4],
+        date: date2,
+        flightTimeInMinutes: 205,
+        distanceInKm: 1978,
+        emptySeats: createdCrafts[1].capacity,
+      },
+      //MAD > BUD
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[4],
+        destination: createdLocations[0],
+        date: date3,
+        flightTimeInMinutes: 205,
+        distanceInKm: 1978,
+        emptySeats: createdCrafts[1].capacity,
+      },
+      ///////////
+      //BUD > ROM
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[0],
+        destination: createdLocations[5],
+        date: date1,
+        flightTimeInMinutes: 105,
+        distanceInKm: 810,
+        emptySeats: createdCrafts[1].capacity,
+      },
+      //ROM > BUD
+      {
+        craft: createdCrafts[1],
+        start: createdLocations[5],
+        destination: createdLocations[0],
+        date: date4,
+        flightTimeInMinutes: 105,
+        distanceInKm: 810,
+        emptySeats: createdCrafts[1].capacity,
+      },
+      ///////////
+      //BUD > WAR
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[0],
+        destination: createdLocations[6],
+        date: date3,
+        flightTimeInMinutes: 75,
+        distanceInKm: 540,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //WAR > BUD
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[6],
+        destination: createdLocations[0],
+        date: date4,
+        flightTimeInMinutes: 75,
+        distanceInKm: 540,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      ///////////
+      //BUD > PRA
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[0],
+        destination: createdLocations[7],
+        date: date1,
+        flightTimeInMinutes: 75,
+        distanceInKm: 444,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //PRA > BUD
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[7],
+        destination: createdLocations[0],
+        date: date2,
+        flightTimeInMinutes: 75,
+        distanceInKm: 444,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      ///////////
+      //BUD > VIE
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[0],
+        destination: createdLocations[8],
+        date: date1,
+        flightTimeInMinutes: 75,
+        distanceInKm: 214,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //VIE > BUD
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[8],
+        destination: createdLocations[0],
+        date: date2,
+        flightTimeInMinutes: 75,
+        distanceInKm: 214,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      ///////////
+      //BUD > ATH
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[0],
+        destination: createdLocations[9],
+        date: date3,
+        flightTimeInMinutes: 120,
+        distanceInKm: 1122,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      //ATH > BUD
+      {
+        craft: createdCrafts[0],
+        start: createdLocations[9],
+        destination: createdLocations[0],
+        date: date4,
+        flightTimeInMinutes: 120,
+        distanceInKm: 1122,
+        emptySeats: createdCrafts[0].capacity,
+      },
+      ///////////
       //BUD > MOO
       {
         craft: createdCrafts[2],
-        start: createdLocations[1],
+        start: createdLocations[0],
         destination: createdLocations[10],
-        date: date3,
+        date: date1,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,
         emptySeats: createdCrafts[2].capacity,
@@ -165,7 +294,7 @@ export class SeedService implements OnApplicationBootstrap, OnModuleDestroy {
       {
         craft: createdCrafts[2],
         start: createdLocations[10],
-        destination: createdLocations[1],
+        destination: createdLocations[0],
         date: date4,
         flightTimeInMinutes: 4320,
         distanceInKm: 384400,

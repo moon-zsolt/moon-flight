@@ -29,6 +29,22 @@ export type UserBookProps = {
   locations: Location[];
 };
 
+type State =
+  | {
+      state: "initial";
+    }
+  | {
+      state: "booking";
+    }
+  | {
+      state: "booked";
+      booking: Booking;
+    }
+  | {
+      state: "error";
+      message: string;
+    };
+
 export function UserBook({ locations }: UserBookProps) {
   const [startId, setStart] = useState<UUID>();
   const [destinationId, setDestination] = useState<UUID>();
@@ -61,14 +77,14 @@ export function UserBook({ locations }: UserBookProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const [booking, setBooking] = useState(false);
+  const [state, setState] = useState<State>({ state: "initial" });
 
   const book = () => {
-    setBooking(true);
+    setState({ state: "booking" });
 
+    // Button is disabled, should never happen but TS doesn't know.
     if (!flightId) {
-      window.alert("Please select a flight!");
-      setBooking(false);
+      setState({ state: "error", message: "Please select a flight!" });
       return;
     }
 
@@ -87,19 +103,19 @@ export function UserBook({ locations }: UserBookProps) {
         if (response.ok) {
           const booking = (await response.json()) as Booking;
 
-          window.alert(
-            `Booking Succeded! Your booking code is ${booking.code}`
-          );
-          window.history.back();
+          setState({ state: "booked", booking });
         } else {
-          window.alert("Booking Failed!");
+          setState({
+            state: "error",
+            message: "Booking failed! Please try again.",
+          });
         }
       })
       .catch(() => {
-        window.alert("Booking Failed!");
-      })
-      .finally(() => {
-        setBooking(false);
+        setState({
+          state: "error",
+          message: "Booking failed! Please try again.",
+        });
       });
   };
 
@@ -177,11 +193,40 @@ export function UserBook({ locations }: UserBookProps) {
 
             <div>
               <Button
-                disabled={!flightId || !firstName || !lastName || booking}
+                disabled={
+                  !flightId ||
+                  !firstName ||
+                  !lastName ||
+                  state.state === "booking" ||
+                  state.state === "booked"
+                }
                 onClick={book}
               >
                 Book
               </Button>
+            </div>
+
+            <div>
+              {state.state === "booking" && (
+                <p className="text-gray-700 dark:text-gray-200">
+                  Booking your flight...
+                </p>
+              )}
+              {state.state === "error" && (
+                <p className="text-red-500">{state.message}</p>
+              )}
+              {state.state === "booked" && (
+                <>
+                  <p>
+                    Your flight has been booked. Take note of Your booking code{" "}
+                    <span className="font-bold">{state.booking.code}!</span>
+                  </p>
+                  <p className="pt-2">
+                    In case You loose your booking code, contact our Customer
+                    Support Team to retrieve it.
+                  </p>
+                </>
+              )}
             </div>
           </nav>
         </div>
